@@ -50,6 +50,6 @@ for n in [10, 20, 30, 50, 100]:
             A[i, i + 1] = -1
             A[i + 1, i] = -1
     x1, t1 = jocobi(A, b)
-    print('n={},Jocobi,{}次,x={}'.format(n,t1,x1))
+    print('n={},Jocobi,{}次,x={}'.format(n, t1, x1))
     x2, t2 = gauss_seidel(A, b)
     print('n={},Gauss-Seidel,{}次,x={}'.format(n, t2, x2))

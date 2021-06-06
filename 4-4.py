@@ -1,6 +1,6 @@
-import matplotlib.pylab as plt
 from typing import Callable
 
+import matplotlib.pylab as plt
 import numpy as np
 
 
@@ -11,7 +11,7 @@ def linear_fit(f: Callable, x: np.ndarray):
     A = np.array([dim, x.sum(), x.sum(), (x * x).sum()], dtype=x.dtype).reshape((2, 2))
     b = np.array([y.sum(), (y * x).sum()]).reshape((2, 1))
     x = np.linalg.solve(A, b)
-    return x[1,0], x[0, 0]
+    return x[1, 0], x[0, 0]
 
 
 f = lambda x: x ** 2

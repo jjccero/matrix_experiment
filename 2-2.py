@@ -55,4 +55,3 @@ x = solve(L, L.T, b)
 
 print('L:\n{}'.format(L))
 print('x:\n{}'.format(x))
-

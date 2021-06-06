@@ -56,10 +56,10 @@ for j, x in enumerate([-2., -1., 0.25, 0.6, 2.]):
     plt.scatter(x, f(x), label='x{} = {}'.format(j + 1, x))
 plt.legend()
 plt.show()
+
 print('secant')
 plt.title('secant')
 plt.plot(x_, f(x_))
-
 for j, x in enumerate([-2., -1., 0.25, 0.6, 2.]):
     x, r1 = secant(f, x + 0.1, x)
     print('x{} = {}, e(k+1)/e(k) = {}'.format(j + 1, x, r1))

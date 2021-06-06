@@ -26,7 +26,7 @@ def euler_improved(f: Callable, a, b, u0, h):
     return x, u
 
 
-def runge_kutta(f: Callable, a, b, h, u0):
+def runge_kutta(f: Callable, a, b, u0, h):
     n = int((b - a) / h) + 1
     u = np.zeros(n)
     x = np.linspace(a, b, n)
@@ -42,14 +42,16 @@ def runge_kutta(f: Callable, a, b, h, u0):
 
 f = lambda x, u: (2 * u / x + x * x * math.exp(x))
 
+a = 1
+b = 2
+u0 = 0
 for h in [0.1, 0.05, 0.01]:
-
     plt.title('h = {}'.format(h))
-    x, u = euler(f, a=1, b=2, u0=0, h=h)
+    x, u = euler(f, a, b, u0, h)
     plt.plot(x, u)
-    x, u = euler_improved(f, a=1, b=2, u0=0, h=h)
+    x, u = euler_improved(f, a, b, u0, h)
     plt.plot(x, u)
-    x, u = runge_kutta(f, a=1, b=2, u0=0, h=h)
+    x, u = runge_kutta(f, a, b, u0, h)
     plt.plot(x, u)
     plt.legend(["Euler", "improved Euler", "Runge-Kutta"])
     plt.show()

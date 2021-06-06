@@ -17,7 +17,7 @@ def jocobi(A: np.ndarray, b: np.ndarray, eps=1e-6):
         if np.linalg.norm(x - x_) < eps:
             break
         x_[:, :] = x[:, :]
-    return x, t
+    return x.reshape(dim), t
 
 
 def gauss_seidel(A: np.ndarray, b: np.ndarray, eps=1e-6):
@@ -36,7 +36,7 @@ def gauss_seidel(A: np.ndarray, b: np.ndarray, eps=1e-6):
         if np.linalg.norm(x - x_) < eps:
             break
         x_[:, :] = x[:, :]
-    return x, t
+    return x.reshape(dim), t
 
 
 for n in [10, 20, 30, 50, 100]:

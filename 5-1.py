@@ -1,12 +1,10 @@
-from math import sin
+import math
 from typing import Callable
 
 import numpy as np
 
 
-# 由于fx是奇函数，对-2到2积分为0
-
-def I(f: Callable, a, b, n: int):
+def I_trapezoid(f: Callable, a, b, n: int):
     h = (b - a) / n
     I_ = np.zeros(1, np.float32)
     I_[0] = f(a) + f(b)
@@ -29,8 +27,15 @@ def I_simpson(f: Callable, a, b, n: int):
     return I_[0]
 
 
-f = lambda x: x * x * sin(x)
-print(I_simpson(f, a=-2, b=2, n=20))
-print(I(f, a=-2, b=2, n=40))
-print(I(f, a=-2, b=2, n=80))
-print(I(f, a=-2, b=2, n=200))
+a = 0
+b = math.pi
+f = lambda x: x * x * math.sin(x)
+I = math.pi ** 2 - 4
+print('复化梯形')
+for n in [20, 40, 80, 200]:
+    I_ = I_trapezoid(f, a, b, n=n)
+    print('{}\t{}\t{}'.format(n, I_, abs(I - I_)))
+print('复化Simpson')
+for n in [20, 40, 80, 200]:
+    I_ = I_simpson(f, a, b, n=n)
+    print('{}\t{}\t{}'.format(n, I_, abs(I - I_)))

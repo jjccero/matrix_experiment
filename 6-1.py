@@ -43,7 +43,7 @@ def runge_kutta(f: Callable, a, b, h, u0):
 f = lambda x, u: (2 * u / x + x * x * math.exp(x))
 
 for h in [0.1, 0.05, 0.01]:
-    plt.figure()
+
     plt.title('h = {}'.format(h))
     x, u = euler(f, a=1, b=2, u0=0, h=h)
     plt.plot(x, u)

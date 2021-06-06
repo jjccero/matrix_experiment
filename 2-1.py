@@ -68,18 +68,17 @@ def solve(L: np.ndarray, U: np.ndarray, b: np.ndarray):
     dim = b.shape[0]
     for i in range(dim):
         rows = b[i, 0]
-        for j in range(0, i):
-            rows -= b[j, 0] * L[i, j]
-        y[i] = rows / L[i, i]
+        for j in range(i):
+            rows -= y[j, 0] * L[i, j]
+        y[i, 0] = rows / L[i, i]
     # Ux=y
     x = np.zeros_like(b)
     for i in reversed(range(dim)):
-        rows = y[i]
+        rows = y[i, 0]
         for j in range(i + 1, dim):
-            rows -= x[j] * U[i, j]
-        x[i] = rows / U[i, i]
+            rows -= x[j, 0] * U[i, j]
+        x[i, 0] = rows / U[i, i]
     return x
-
 
 def inverse(A: np.ndarray):
     L, U = LU(A)
@@ -108,10 +107,12 @@ A = np.array(
 b = np.array([-15., 27, -23, 0, -20, 12, -7, 7, 10]).reshape((9, 1))
 L, U = LU(A)
 x = solve(L, U, b)
-print('LU:\n', x, det(U))
+A_inverse = inverse(A)
+print('LU:\ndet={}'.format(det(U)))
+print('x=\n{}'.format(x))
 P, L, U = PLU(A)
+
+print('列主元LU:')
 x = solve(L, U, np.matmul(P, b))
-print('列主元LU:\n')
-AI = inverse(A)
-I = np.matmul(A, AI)
-input()
+print('x=\n{}'.format(x))
+
